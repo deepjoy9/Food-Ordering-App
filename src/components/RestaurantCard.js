@@ -1,51 +1,32 @@
-import { useContext } from "react";
 import { CDN_URL } from "../utils/constants";
-import UserContext from "../utils/UserContext";
 
 const RestaurantCard = (props) => {
   const { resData } = props;
-  const { loggedInUser } = useContext(UserContext);
-
-  const {
-    cloudinaryImageId,
-    name,
-    avgRating,
-    cuisines,
-    costForTwo,
-    deliveryTime,
-  } = resData;
+  const { cloudinaryImageId, name, avgRating, cuisines, costForTwo, sla } =
+    resData?.info;
 
   return (
-    <div
-      data-testid="resCard"
-      className="m-4 p-4 w-[250px] rounded-lg bg-gray-100 hover:bg-gray-200"
-    >
+    <div className="shadow-lg border rounded-lg font-Roboto duration-200 hover:scale-105">
       <img
-        className="rounded-lg"
+        className="res-logo rounded-lg"
         alt="res-logo"
         src={CDN_URL + cloudinaryImageId}
       />
-      <h3 className="font-bold py-4 text-lg">{name}</h3>
-      <h4>{cuisines.join(", ")}</h4>
-      <h4>{avgRating} stars</h4>
-      <h4>₹{costForTwo / 100} FOR TWO</h4>
-      <h4>{deliveryTime} minutes</h4>
-      <h4>User : {loggedInUser} </h4>
+      <div className="res-card-content p-2">
+        <h2 className="font-bold text-xl truncate ... font-serif">{name}</h2>
+        <h4 className="text-sm  text-gray-600 truncate ...">
+          {cuisines.join(", ")}
+        </h4>
+        <div className="flex justify-between items-center text-gray-600 mt-4 text-sm ">
+          <h4 className=" px-2 p-1 bg-green-700 rounded-md text-white ">
+            <p className="">★{avgRating}</p>{" "}
+          </h4>
+          <h4>{sla.deliveryTime} mins</h4>
+          <h4>{costForTwo}</h4>
+        </div>
+      </div>
     </div>
   );
-};
-
-export const withPromtedLabel = (RestaurantCard) => {
-  return (props) => {
-    return (
-      <div>
-        <label className="absolute bg-black text-white m-2 p-2 rounded-lg">
-          Promoted
-        </label>
-        <RestaurantCard {...props} />
-      </div>
-    );
-  };
 };
 
 export default RestaurantCard;
