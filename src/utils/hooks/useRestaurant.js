@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { MENU_DATA } from "../mocks/MOCK_MENU_DATA";
+import { MENU_DATA } from "../../mocks/MOCK_MENU_DATA";
 
 const useRestaurant = (resId) => {
   const [resInfo, setResInfo] = useState(null);

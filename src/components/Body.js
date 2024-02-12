@@ -3,8 +3,9 @@ import { useEffect, useState, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { searchFilterData } from "../utils/searchFilterData";
-import useOnline from "../utils/useOnline";
+import useOnline from "../utils/hooks/useOnline";
 import { data } from "../mocks/MOCK_RES_DATA";
+
 const Body = () => {
   const [listOfRestaurants, setlistOfRestaurants] = useState([]);
   const [filteredRestaurants, setfilteredRestaurants] = useState([]);
@@ -13,38 +14,20 @@ const Body = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const json = data;
-      const datay =
-        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants;
-      const resData = datay
-        ? json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
-            ?.restaurants
-        : json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
-            ?.restaurants;
-      setTimeout(() => {
-        setlistOfRestaurants(resData);
-        setfilteredRestaurants(resData);
-        setLoading(false);
-      }, 2000);
-    };
     fetchData();
   }, []);
 
-  function fetchData() {
-    const json = data;
-    const datay =
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+  const fetchData = async () => {
+    const resData =
+      data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants;
-    const resData = datay
-      ? json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants
-      : json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants;
-    setlistOfRestaurants(resData);
-    setfilteredRestaurants(resData);
-  }
+
+    setTimeout(() => {
+      setlistOfRestaurants(resData);
+      setfilteredRestaurants(resData);
+      setLoading(false);
+    }, 1000);
+  };
 
   const performSearch = (searchText, restaurants) => {
     if (searchText != "") {

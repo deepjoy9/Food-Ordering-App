@@ -1,6 +1,6 @@
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
-import useRestaurant from "../utils/useRestaurant";
+import useRestaurant from "../utils/hooks/useRestaurant";
 import { addItem } from "../utils/cartSlice";
 import { useDispatch } from "react-redux";
 import { MENU_ITEM_URL } from "../utils/constants";
