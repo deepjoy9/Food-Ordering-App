@@ -2,7 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-import { filterData } from "../utils/helper";
+import { searchFilterData } from "../utils/searchFilterData";
 import useOnline from "../utils/useOnline";
 import { data } from "../mocks/MOCK_RES_DATA";
 const Body = () => {
@@ -48,7 +48,7 @@ const Body = () => {
 
   const performSearch = (searchText, restaurants) => {
     if (searchText != "") {
-      const filtered = filterData(searchText, restaurants);
+      const filtered = searchFilterData(searchText, restaurants);
       setfilteredRestaurants(filtered);
       setnoReserr("");
       if (filtered?.length === 0) {
