@@ -23,8 +23,7 @@ const cartSlice = createSlice({
         (item) => item.id === action.payload.id
       );
       if (index > -1) {
-        // only splice array when item is found
-        state.items.splice(index, 1); // 2nd parameter means remove one item only
+        state.items.splice(index, 1);
       }
     },
     increaseQuantity: (state, action) => {
